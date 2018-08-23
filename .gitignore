@@ -1,0 +1,42 @@
+# 忽略DS_store文件，该文件包括个人信息，
+# 最好不要上传到git中，而且该文件只是
+# finder中记录当前文件夹的信息，但是在
+# windows中没有
+.DS_store
+# 忽略node_modules文件，写的是相对路径，
+# 表示不管是根路径下的node_modules还是
+# xxx/node_modules下的文件都会忽略，在
+# 最前面写有/，表示只忽略根目录下的。后
+# 面的/符号，表示文件夹下的所有内容。
+node_modules/
+dist/
+# 后面加星号不知道是啥意思，但是好多大牛
+# 都是后面加的星号，npm-debug是npm i出
+# 错的时候才有的。
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+# 每次添加依赖或者更新包版本，yarn都会把
+# 相关版本信息写入yarn.lock文件。
+*.lock
+# 这个package-lock.json 是在 `npm install`
+# 时候生成一份文件，用以记录当前状态下实际
+# 安装的各个npm package的具体来源和版本号。
+package-lock.json
+
+
+
+# 相关的编辑器的忽略配置
+
+# 你的ide的一些配置、主题、字体呀 缓存打开
+# 的文件名称 还有你远程连接的配置等等。
+.idea
+.vscode
+# sln就是打开文件的索引,正确引导你进入环境,
+# 进入工程!，suo大概就是保存一些与代码本身
+# 无关的一些配置。
+*.suo
+*.sln
+*.ntvs*
+*.njsproj
