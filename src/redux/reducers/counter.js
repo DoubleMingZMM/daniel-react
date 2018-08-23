@@ -5,7 +5,8 @@ import {INCREMENT, DECREMENT, RESET} from '../actions/counter'
  */
 
 const initState = {
-    count: 0
+    count: 0,
+    number: 22
 }
 /*
  * reducer
