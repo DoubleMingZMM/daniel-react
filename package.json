@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "dev-build": "webpack --config webpack.dev.config.js",
-    "build": "webpack --config webpack.config.js",
-    "start": "webpack-dev-server --config webpack.dev.config.js --progress"
+    "dev-build": "webpack --config build/webpack.dev.config.js",
+    "build": "webpack --config build/webpack.pro.config.js",
+    "start": "webpack-dev-server --config build/webpack.dev.config.js --progress"
   },
   "keywords": [
     "react",
@@ -42,6 +42,7 @@
     "url-loader": "6.9.0",
     "webpack": "^4.16.5",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.5"
+    "webpack-dev-server": "^3.1.5",
+    "webpack-merge": "^4.1.4"
   }
 }
