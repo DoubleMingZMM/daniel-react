@@ -1,6 +1,5 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 // 解决相对路径的问题，否则下面很多地方都需要写../xxx/xxxx
 function resolvePath(dir) {
@@ -8,6 +7,7 @@ function resolvePath(dir) {
 }
 
 const commonConfig = {
+  // context: path.join(__dirname, '../'),
   entry: {
     app: [
       // 同等于path.join(__dirname, '../src/index.js')
@@ -44,12 +44,6 @@ const commonConfig = {
       filename: 'index.html',
       // 同等于path.join(__dirname, '../src/html')
       template: resolvePath('src/index.html')
-    }),
-    // 打包之前清理dist文件夹
-    // 同等于path.join(__dirname, '../dist')
-    new CleanWebpackPlugin(['dist'], {
-      // 给CleanWebpackPlugin插件设置根节点，因为该插件会默认为项目根路径
-      root: path.resolve(__dirname, '../')
     })
   ],
 

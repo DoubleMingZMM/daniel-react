@@ -1,7 +1,7 @@
-// const path = require('path')
+const path = require('path')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
-// const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 const baseConfig = require('./webpack.base.config.js')
@@ -41,6 +41,12 @@ const proConfig = {
     new ExtractTextPlugin({
       filename: '[name].[chunkhash].css',
       allChunks: true
+    }),
+    // 打包之前清理dist文件夹
+    // 同等于path.join(__dirname, '../dist')
+    new CleanWebpackPlugin(['dist'], {
+      // 给CleanWebpackPlugin插件设置根节点，因为该插件会默认为项目根路径
+      root: path.resolve(__dirname, '../')
     })
   ],
 

@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "build:dev": "webpack --config build/webpack.dev.config.js --mode development",
-    "build:pro": "webpack --config build/webpack.pro.config.js --mode production",
+    "build": "webpack --config build/webpack.pro.config.js --mode production",
     "start": "webpack-dev-server --config build/webpack.dev.config.js --progress --mode development"
   },
   "keywords": [
