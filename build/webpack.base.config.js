@@ -46,7 +46,11 @@ const commonConfig = {
       template: resolvePath('src/index.html')
     }),
     // 打包之前清理dist文件夹
-    new CleanWebpackPlugin(['dist'])
+    // 同等于path.join(__dirname, '../dist')
+    new CleanWebpackPlugin(['dist'], {
+      // 给CleanWebpackPlugin插件设置根节点，因为该插件会默认为项目根路径
+      root: path.resolve(__dirname, '../')
+    })
   ],
 
   resolve: {
