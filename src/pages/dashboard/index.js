@@ -1,13 +1,13 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import image from '../../static/offshelf.png'
 
 export default class Dashboard extends Component {
-    render() {
-        return (
-            <div>
+  render() {
+    return (
+      <div>
                 this is dashboard~
-                <img src={image}/>
-            </div>
-        )
-    }
+        <img src={image}/>
+      </div>
+    )
+  }
 }
