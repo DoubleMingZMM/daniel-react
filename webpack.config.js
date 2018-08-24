@@ -1,7 +1,9 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+// const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
     /*入口*/
@@ -16,7 +18,10 @@ module.exports = {
     output: {
         path: path.join(__dirname, './dist'),
         filename: '[name].[chunkhash].js',
-        chunkFilename: '[name].[chunkhash].js'
+        chunkFilename: '[name].[chunkhash].js',
+        // 我们的静态文件放在了单独的静态服务器上去了，那我
+        // 们打包的时候，如何让静态文件的链接定位到静态服务器呢？
+        publicPath : '/'
     },
 
     /*src文件夹下面的以.js结尾的文件，要使用babel解析*/
@@ -30,8 +35,15 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: "css-loader"
+                })
             },
+            /*{
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },*/
             {
                 test: /\.(png|jpg|gif)$/,
                 use: [{
@@ -61,13 +73,26 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: path.join(__dirname, 'src/index.html')
-        })/*,
+        }),/*,
         // 压缩打出来的包 todo 似乎无效
         new UglifyJSPlugin({
             uglifyOptions: {
                 ecma: 8
             }
         })*/
+        // 我们可以使用 webpack 内置的 DefinePlugin 为所有的依赖定义这个变量
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
+        // 打包之前清理dist文件夹
+        new CleanWebpackPlugin(['dist']),
+        // 单独打包成css文件，与上面的use: ExtractTextPlugin.extract一起使用
+        new ExtractTextPlugin({
+            filename: '[name].[chunkhash].css',
+            allChunks: true
+        })
     ],
     
     // webpack 4 中去除了CommonsChunkPlugin抽取公共文件，使用下面的的方式

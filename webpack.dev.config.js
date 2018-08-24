@@ -15,7 +15,7 @@ module.exports = {
     // filename中hash改成chunkhash
     output: {
         path: path.join(__dirname, './dist'),
-        filename: '[name].[chunkhash].js',
+        filename: '[name].[hash].js',
         chunkFilename: '[name].[chunkhash].js'
     },
 
