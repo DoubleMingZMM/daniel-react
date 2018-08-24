@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const webpack = require('webpack')
 
+
 // 解决相对路径的问题，否则下面很多地方都需要写../xxx/xxxx
 function resolvePath (dir) {
     return path.join(__dirname, '..', dir)

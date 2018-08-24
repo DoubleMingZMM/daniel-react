@@ -1,0 +1,24 @@
+# daniel-react
+# editorconfig配置文件是对编辑器的行为进行配置，
+# 他比编辑器的默认行为优先级更高，当打开一个文件
+# 时，EditorConfig插件会在打开文件的目录和其每一
+# 级父目录查找.editorconfig文件，直到有一个配置文
+# 件root=true。EditorConfig的配置文件是从上往下
+# 读取的并且最近的EditorConfig配置文件会被最先读
+# 取. 匹配EditorConfig配置文件中的配置项会按照读
+# 取顺序被应用, 所以最近的配置文件中的配置项拥有
+# 优先权。如果.editorconfig文件没有进行某些配置，
+# 则使用编辑器默认的设置
+root = true
+
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.md]
+insert_final_newline = false
+trim_trailing_whitespace = false
