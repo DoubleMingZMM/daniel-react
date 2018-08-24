@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import './index.css'
 
 export default class Home extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ export default class Home extends Component {
 
     render() {
         return (
-            <div>
+            <div className="color-red">
                 this is home~<br/>
                 当前计数：{this.state.count}<br/>
                 <button onClick={() => this._handleClick()}>自增</button>

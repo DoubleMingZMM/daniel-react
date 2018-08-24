@@ -1,18 +1,18 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
     /*入口*/
     entry: {
-        // 和开发环境不一样，多了vendor，生产环境和开发环境都不改变的依赖
         app: [
             path.join(__dirname, 'src/index.js')
-        ]
+        ],
+        vendor: ['react', 'react-router-dom', 'redux', 'react-dom', 'react-redux']
     },
 
     /*输出到dist文件夹，输出文件名字为bundle.js,chunkFilename可以设置dist文件中的名字*/
-    // filename中hash改成chunkhash
     output: {
         path: path.join(__dirname, './dist'),
         filename: '[name].[chunkhash].js',
@@ -43,7 +43,7 @@ module.exports = {
             }
         ]
     },
-    
+
     devServer: {
         contentBase: path.join(__dirname, './dist'),
         open: true,
@@ -52,18 +52,30 @@ module.exports = {
         historyApiFallback: true, // 让所有找不到的页面重新定位到dist中
         hot: true
     },
-    
+
     plugins:[
-        // 热更模块插件，热更 浏览
-        // 器不会刷新，只会更新自己修改的那一块。可以在cli中只配置--hot就可以
-        // 搞定。index.js中增加if (module.hot) { module.hot.accept()}
-        new webpack.HotModuleReplacementPlugin(), 
+        /*new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor'
+        }),*/
         // template中的html是一个模板文件，生成的文件叫filename: 'index.html'
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: path.join(__dirname, 'src/index.html')
-        })
+        })/*,
+        // 压缩打出来的包 todo 似乎无效
+        new UglifyJSPlugin({
+            uglifyOptions: {
+                ecma: 8
+            }
+        })*/
     ],
+    
+    // webpack 4 中去除了CommonsChunkPlugin抽取公共文件，使用下面的的方式
+    optimization: {
+        splitChunks: {
+            name: 'common'
+        }
+    },
 
     // 别名配置
     resolve: {
@@ -73,7 +85,7 @@ module.exports = {
             router: path.join(__dirname, 'src/router')
         }
     },
-    
-    // 打包之后的错误追踪
-    devtool: 'inline-source-map'
+
+    // 打包之后的错误追踪(和开发环境不一样)
+    devtool: 'cheap-module-source-map'
 }
