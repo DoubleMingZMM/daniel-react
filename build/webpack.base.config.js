@@ -57,7 +57,14 @@ commonConfig = {
             component: resolvePath('src/component'),
             router: resolvePath('src/router')
         }
+    },
+
+    // 实际上是开发环境的hints,但是开发环境包含sourcemap 
+    // 并且代码未压缩所以一般都会超过这个大小，所以我们可
+    // 以在开发环境把这个 warning 关闭。 // todo,现在都开着了
+    performance: {
+        hints:  false
     }
-};
+}
 
 module.exports = commonConfig
